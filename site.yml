@@ -1,0 +1,16 @@
+---
+
+- hosts: all
+  vars_files:
+    - "infras/global/vars/{{ aws_account }}.yml"
+  roles:
+  - base
+  - nat
+
+- hosts: nat
+  vars_files:
+    - "infras/global/vars/{{ aws_account }}.yml"
+  vars:
+  roles:
+  - base
+  - nat

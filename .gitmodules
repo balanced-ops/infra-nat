@@ -1,0 +1,6 @@
+[submodule "roles/base"]
+	path = roles/base
+	url = git@github.com:balanced-cookbooks/ansible-base.git
+[submodule "infras/global"]
+	path = infras/global
+	url = git@github.com:balanced-cookbooks/infra-global.git

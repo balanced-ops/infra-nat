@@ -1,0 +1,8 @@
+---
+# required to install pip cfg
+users:
+ - name: vagrant
+   groups: []
+   shell: /bin/bash
+   authorized_keys:
+   revoked_keys:

@@ -1,0 +1,53 @@
+---
+
+# Local development playbooook
+# ----------------------------
+
+# A playbook for testing and integration.
+
+# It will provision the `test` hosts in the inventory,
+# which will, by default, specify the provided vagrant VM.
+
+# This playbook should aim to test the most extensive
+# or comprehensive configuration possible for your role.
+
+- name: 'infra-nat integration tests'
+
+  hosts: test
+
+  vars:
+    # custom_configuration: value
+    pypi_scheme: https
+    pypi_username: "{{ lookup('env', 'pypi_username') }}"
+    pypi_password: "{{ lookup('env', 'pypi_password') }}"
+    pypi_host: pypi.vandelay.io
+    pypi_index: /balanced/prod/+simple/
+
+  pre_tasks:
+
+    # Most vagrant boxes have outdated repositories
+    - name: APT update
+      sudo: yes
+      apt: update_cache=yes
+
+    - name: Make sure the dependencies are installed
+      sudo: yes
+      apt:
+        pkg: "{{item}}"
+        state: present
+      with_items: ["python-virtualenv", "python-pip", "git", "python-dev"]
+
+  tasks:
+    - name: Create virtualenv
+      shell: virtualenv infra
+
+    - name: Install
+      shell: ~/infra/bin/pip install -r requirements.txt
+      args:
+        chdir: /vagrant
+
+  roles:
+    - '../roles/base'
+    - '../roles/nat'
+    - '.'    # The current directory itself is the role
+

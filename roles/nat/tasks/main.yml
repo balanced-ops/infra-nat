@@ -1,0 +1,7 @@
+---
+- name: create /usr/local/sbin/configure-pat.sh
+  copy: src=configure-pat.sh dest=/usr/local/sbin/configure-pat.sh owner=root group=root mode=0744
+
+- name: execute pat
+  shell: /usr/local/sbin/configure-pat.sh
+  sudo: yes
