@@ -2,3 +2,6 @@ localhost
 
 [nats]
 localhost
+
+[nats:vars]
+aws_account=poundpay
