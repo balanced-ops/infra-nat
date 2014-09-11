@@ -7,9 +7,11 @@ Vagrant.configure '2' do |config|
     config.vm.network :private_network, ip: '192.168.33.11'
   end
 
-  config.vm.synced_folder '.', '/home/vagrant/infra-nat'
+  project_name = File.basename(Dir.getwd)
 
-  config.vm.define 'test-ubuntu-precise' do |box|
+  config.vm.synced_folder '.', "/home/vagrant/#{project_name}"
+
+  config.vm.define project_name do |box|
     box.vm.box     = 'precise64'
     box.vm.box_url = 'https://s3.amazonaws.com/gsc-vagrant-boxes/ubuntu-12.04-omnibus-chef.box'
     apply_test_vm_defaults box

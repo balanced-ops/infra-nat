@@ -2,7 +2,15 @@
 # required to install pip cfg
 users:
  - name: vagrant
-   groups: []
+   groups:
+     - vagrant
+     - adm
+     - cdrom
+     - sudo
+     - dip
+     - plugdev
+     - lpadmin
+     - sambashare
    shell: /bin/bash
-   authorized_keys:
-   revoked_keys:
+   authorized_keys: []
+   revoked_keys: []
