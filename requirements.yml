@@ -1,0 +1,2 @@
+dependencies:
+- role: git+https://github.com/balanced-cookbooks/ansible-base.git,1.0.0
